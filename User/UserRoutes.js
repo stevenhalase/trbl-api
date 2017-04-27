@@ -13,6 +13,11 @@ router.get('/', UserController.list);
 router.get('/:id', UserController.show);
 
 /*
+ * GET
+ */
+router.get('/id/:id', UserController.getById);
+
+/*
  * POST
  */
 router.post('/', UserController.create);

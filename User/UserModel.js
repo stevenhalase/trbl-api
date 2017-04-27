@@ -7,7 +7,12 @@ var UserSchema = new Schema({
 	'LastName' : String,
 	'Age' : Number,
 	'BirthDate' : Date,
-	'Location' : Object,
+	'Location' : {
+    'Latitude' : Number,
+    'Longitude' : Number,
+    'City' : String,
+    'State' : String
+  },
 	'ProfileImage' : String,
 	'CoverImage' : String,
   'Auth0Id': String
