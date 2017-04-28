@@ -2,7 +2,15 @@ const express = require('express')
 const app = express()
 const bodyParser= require('body-parser')
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/trbl');
+var port = process.env.PORT || 8080;
+var uristring = process.env.MONGODB_URI || 'mongodb://localhost/trbl';
+
+mongoose.connect(uristring, error => {
+  if (error) { console.error(error); } 
+  else {
+      console.log('Mongoose connected successfully')
+  }
+})
 
 const users = require('./User/UserRoutes');
 const feedposts = require('./FeedPost/FeedPostRoutes');
@@ -24,6 +32,6 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-app.listen(8080, function () {
+app.listen(port, function () {
   console.log('App listening on: http://localhost:8080')
 })
