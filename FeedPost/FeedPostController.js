@@ -95,10 +95,10 @@ module.exports = {
 
             FeedPost.Date = req.body.Date ? req.body.Date : FeedPost.Date;
             FeedPost.User = req.body.User ? req.body.User : FeedPost.User;
-            User.Location.Latitude = req.body.Location.Latitude ? req.body.Location.Latitude : User.Location.Latitude;
-            User.Location.Longitude = req.body.Location.Longitude ? req.body.Location.Longitude : User.Location.Longitude;
-            User.Location.City = req.body.Location.City ? req.body.Location.City : User.Location.City;
-            User.Location.State = req.body.Location.State ? req.body.Location.State : User.Location.State;
+            FeedPost.Location.Latitude = req.body.Location.Latitude ? req.body.Location.Latitude : FeedPost.Location.Latitude;
+            FeedPost.Location.Longitude = req.body.Location.Longitude ? req.body.Location.Longitude : FeedPost.Location.Longitude;
+            FeedPost.Location.City = req.body.Location.City ? req.body.Location.City : FeedPost.Location.City;
+            FeedPost.Location.State = req.body.Location.State ? req.body.Location.State : User.Location.State;
             FeedPost.Title = req.body.Title ? req.body.Title : FeedPost.Title;
             FeedPost.Content = req.body.Content ? req.body.Content : FeedPost.Content;
             FeedPost.Attachments = req.body.Attachments ? req.body.Attachments : FeedPost.Attachments;
