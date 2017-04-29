@@ -10,6 +10,11 @@ router.get('/', UserController.list);
 /*
  * GET
  */
+router.get('/location/', UserController.listByLocation);
+
+/*
+ * GET
+ */
 router.get('/:id', UserController.show);
 
 /*

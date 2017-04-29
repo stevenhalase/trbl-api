@@ -23,6 +23,32 @@ module.exports = {
     },
 
     /**
+     * UserController.listByLocation()
+     */
+    listByLocation: function (req, res) {
+      let lat = req.query.lat;
+      let lng = req.query.lng;
+
+      UserModel.find(function (err, Users) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting User.',
+                    error: err
+                });
+            }
+            let returnUsers = [];
+            for (let user of Users) {
+              let dist = getDistanceFromLatLonInKm(lat, lng, user.Location.Latitude, user.Location.Longitude);
+              console.log('dist: ' + dist);
+              if (dist <= 16.0934) {
+                returnUsers.push(user);
+              }
+            }
+            return res.json(returnUsers);
+        });
+    },
+
+    /**
      * UserController.show()
      */
     show: function (req, res) {
@@ -45,7 +71,7 @@ module.exports = {
     },
 
     /**
-     * UserController.show()
+     * UserController.getById()
      */
     getById: function (req, res) {
       console.log(req.params)
@@ -160,3 +186,21 @@ module.exports = {
         });
     }
 };
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
