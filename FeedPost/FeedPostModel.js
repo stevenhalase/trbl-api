@@ -16,7 +16,22 @@ var FeedPostSchema = new Schema({
 	'Title' : String,
 	'Content' : String,
 	'Attachments' : Array,
-	'Comments' : Array,
+	'Comments' : [{
+    'User': {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    'Date': Date,
+    'Content': String,
+    'Replies': [{
+      'User': {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      'Date': Date,
+      'Content': String
+    }]
+  }],
 	'Likes' : Array
 });
 
