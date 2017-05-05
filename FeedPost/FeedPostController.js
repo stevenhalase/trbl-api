@@ -11,7 +11,11 @@ module.exports = {
      * FeedPostController.list()
      */
     list: function (req, res) {
-        FeedPostModel.find(function (err, FeedPosts) {
+        FeedPostModel.find({})
+          .populate('User')
+          .populate('Comments.User')
+          .populate('Comments.Replies.User')
+          .exec(function (err, FeedPosts) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting FeedPost.',
@@ -19,7 +23,7 @@ module.exports = {
                 });
             }
             return res.json(FeedPosts);
-        });
+          });
     },
 
     /**
@@ -27,7 +31,11 @@ module.exports = {
      */
     show: function (req, res) {
         var id = req.params.id;
-        FeedPostModel.findOne({_id: id}, function (err, FeedPost) {
+        FeedPostModel.findOne({_id: id})
+          .populate('User')
+          .populate('Comments.User')
+          .populate('Comments.Replies.User')
+          .exec(function (err, FeedPost) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting FeedPost.',

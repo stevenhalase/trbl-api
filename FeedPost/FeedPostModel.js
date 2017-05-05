@@ -23,13 +23,15 @@ var FeedPostSchema = new Schema({
     },
     'Date': Date,
     'Content': String,
+    'Likes': Array,
     'Replies': [{
       'User': {
         type: Schema.Types.ObjectId,
         ref: 'User'
       },
       'Date': Date,
-      'Content': String
+      'Content': String,
+      'Likes' : Array
     }]
   }],
 	'Likes' : Array
